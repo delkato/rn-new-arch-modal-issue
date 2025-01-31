@@ -5,14 +5,14 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
   View,
 } from 'react-native';
@@ -24,75 +24,87 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import CustomModal from './Modal';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
+  const [visible4, setVisible4] = useState(false);
+  const [visible5, setVisible5] = useState(false);
+  const [visible6, setVisible6] = useState(false);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <View>
+      <Button
+        onPress={() => setVisible1(true)}
+        title="Open modal 1"
+        color="#841584"
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <Button
+        onPress={() => setVisible2(true)}
+        title="Open modal 2"
+        color="#841584"
+      />
+      <Button
+        onPress={() => setVisible3(true)}
+        title="Open modal 3"
+        color="#841584"
+      />
+      <Button
+        onPress={() => setVisible4(true)}
+        title="Open modal 4"
+        color="#841584"
+      />
+      <Button
+        onPress={() => setVisible5(true)}
+        title="Open modal 5"
+        color="#841584"
+      />
+      <Button
+        onPress={() => setVisible6(true)}
+        title="Open modal 6"
+        color="#841584"
+      />
+      <CustomModal
+        visible={visible1}
+        setVisible={setVisible1}
+        number={1}
+      />
+      <CustomModal
+        visible={visible2}
+        setVisible={setVisible2}
+        number={2}
+      />
+      <CustomModal
+        visible={visible3}
+        setVisible={setVisible3}
+        number={3}
+      />
+      <CustomModal
+        visible={visible4}
+        setVisible={setVisible4}
+        number={4}
+      />
+      <CustomModal
+        visible={visible5}
+        setVisible={setVisible5}
+        number={5}
+      />
+      <CustomModal
+        visible={visible6}
+        setVisible={setVisible6}
+        number={6}
+        onPress={() => {
+          setVisible6(false)
+          setVisible2(true)
+        }}
+      />
+    </View>
   );
 }
 
